@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/prefix1">
+        <file>plane2.png</file>
+        <file>plane1.png</file>
+        <file>plane_player.png</file>
+        <file>objective1.png</file>
+        <file>map5.png</file>
+        <file>map4.png</file>
+        <file>map3.jpg</file>
+        <file>map2.jpg</file>
+        <file>map1.png</file>
+        <file>compass2.png</file>
+        <file>compass.png</file>
+        <file>player0.png</file>
+        <file>compass0.png</file>
+    </qresource>
+</RCC>
