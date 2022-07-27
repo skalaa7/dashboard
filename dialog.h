@@ -12,6 +12,8 @@
 #include <QTime>
 #include <QTimer>
 #include <QRandomGenerator>
+#include <QMessageBox>
+#include <QCoreApplication>
 #define SPEED 5
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }
@@ -40,5 +42,8 @@ private:
     int difx,dify,difz;
     int score;
     bool hold_altitude;
+    bool inbounds;
+    QMessageBox msBox;
+    int ret;
 };
 #endif // DIALOG_H

@@ -57,6 +57,7 @@ Dialog::Dialog(QWidget *parent)
     score=0;
     ui->score->display(score);
     hold_altitude=false;
+
 }
 
 Dialog::~Dialog()
@@ -158,6 +159,8 @@ void Dialog::dashboard()
             pix_compass=QPixmap("/home/pi/RacEle/plane_dashboard/plane_dashboard/compass315.png");
             break;
     }
+
+
     difx=abs(playrx-trgtx);
     dify=abs(playry-trgty);
     difz=abs(playrz-trgtz);
@@ -181,8 +184,45 @@ void Dialog::dashboard()
         ui->target->move(trgtx+250,trgty+100);
 
     }
-
        ui->score->display(score);
+
+       inbounds=true;
+       if((playrx<0)||(playrx>420))
+           inbounds=false;
+       if((playry<0)||(playry>420))
+               inbounds=false;
+       if(!inbounds)
+       {
+           msBox.setText("Your score is:"+QString::number(score));
+           msBox.setInformativeText("Play again?");
+           msBox.setStandardButtons(QMessageBox::Yes|QMessageBox::No);
+           msBox.setDefaultButton(QMessageBox::No);
+           ret=msBox.exec();
+       }
+       switch(ret)
+       {
+           case QMessageBox::Yes:
+                //Reset
+                playrx=220;
+                playry=400;
+                playrz=0;
+                pitch=0;
+                xyangle=0;
+                ui->player->move(playrx+250,playry+100);
+                trgtx=QRandomGenerator::global()->bounded(30,350);
+                trgty=QRandomGenerator::global()->bounded(30,350);
+                trgtz=QRandomGenerator::global()->bounded(20,200);
+                ui->target->move(trgtx+250,trgty+100);
+                score=0;
+                ui->score->display(score);
+                break;
+           case QMessageBox::No:
+                QCoreApplication::exit();
+                break;
+           default:
+                break;
+       }
+       ret=1000;
 
 }
 
